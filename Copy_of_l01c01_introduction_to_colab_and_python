@@ -1,1 +1,1093 @@
-
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "accelerator": "GPU",
+    "colab": {
+      "name": "Copy of l01c01_introduction_to_colab_and_python.ipynb",
+      "provenance": [],
+      "collapsed_sections": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/kratika659/web-scraping/blob/main/Copy_of_l01c01_introduction_to_colab_and_python.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Za8-Nr5k11fh"
+      },
+      "source": [
+        "##### Copyright 2018 The TensorFlow Authors."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hnVdJ1a4m5Vp"
+      },
+      "source": [
+        "import requests"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cellView": "form",
+        "id": "Eq10uEbw0E4l"
+      },
+      "source": [
+        "#@title Licensed under the Apache License, Version 2.0 (the \"License\");\n",
+        "# you may not use this file except in compliance with the License.\n",
+        "# You may obtain a copy of the License at\n",
+        "#\n",
+        "# https://www.apache.org/licenses/LICENSE-2.0\n",
+        "#\n",
+        "# Unless required by applicable law or agreed to in writing, software\n",
+        "# distributed under the License is distributed on an \"AS IS\" BASIS,\n",
+        "# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n",
+        "# See the License for the specific language governing permissions and\n",
+        "# limitations under the License."
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iqQALwjWm8FM"
+      },
+      "source": [
+        "user='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "YHI3vyhv5p85"
+      },
+      "source": [
+        "## **Introduction to Colab and Python**"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mtBrv0Z6nySH"
+      },
+      "source": [
+        "url = \"https://en.wikipedia.org/wiki/List_of_state_and_union_territory_capitals_in_India\"\n",
+        "\n",
+        "head = {'User-Agent': user}"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "OVi775ZJ2bsy"
+      },
+      "source": [
+        "<table class=\"tfo-notebook-buttons\" align=\"left\">\n",
+        "  <td>\n",
+        "    <a target=\"_blank\" href=\"https://colab.research.google.com/github/tensorflow/examples/blob/master/courses/udacity_intro_to_tensorflow_for_deep_learning/l01c01_introduction_to_colab_and_python.ipynb\"><img src=\"https://www.tensorflow.org/images/colab_logo_32px.png\" />Run in Google Colab</a>\n",
+        "  </td>\n",
+        "  <td>\n",
+        "    <a target=\"_blank\" href=\"https://github.com/tensorflow/examples/blob/master/courses/udacity_intro_to_tensorflow_for_deep_learning/l01c01_introduction_to_colab_and_python.ipynb\"><img src=\"https://www.tensorflow.org/images/GitHub-Mark-32px.png\" />View source on GitHub</a>\n",
+        "  </td>\n",
+        "</table>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "nVX8-0OTodah"
+      },
+      "source": [
+        "page = requests.get(url, head)\n",
+        "\n",
+        "from bs4 import BeautifulSoup\n",
+        "sp = BeautifulSoup(page.content, 'html.parser')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "F8YVA_634OFk"
+      },
+      "source": [
+        "Welcome to this Colab where you will get a quick introduction to the Python programming language and the environment used for the course's exercises: Colab.\n",
+        "\n",
+        "Colab is a Python development environment that runs in the browser using Google Cloud.\n",
+        "\n",
+        "For example, to print \"Hello World\", just hover the mouse over [ ] and press the play button to the upper left. Or press shift-enter to execute."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "GcKxpD3SpHJZ"
+      },
+      "source": [
+        "all_tables = sp.find_all('table')\n",
+        "\n",
+        "table = sp.find('table', class_='wikitable sortable plainrowheaders')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "X9uIpOS2zx7k",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "965085d4-361e-4dbe-f830-828394669662"
+      },
+      "source": [
+        "print(table)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "<table class=\"wikitable sortable plainrowheaders\">\n",
+            "<caption>States\n",
+            "</caption>\n",
+            "<tbody><tr>\n",
+            "<th scope=\"col\">No.\n",
+            "</th>\n",
+            "<th scope=\"col\">State\n",
+            "</th>\n",
+            "<th scope=\"col\">Administrative / Executive\n",
+            "<p>capital \n",
+            "</p>\n",
+            "</th>\n",
+            "<th scope=\"col\">Legislative capital\n",
+            "</th>\n",
+            "<th scope=\"col\">Judicial capital\n",
+            "</th>\n",
+            "<th scope=\"col\">Year of establishment\n",
+            "</th>\n",
+            "<th scope=\"col\">Former capital\n",
+            "</th></tr>\n",
+            "<tr>\n",
+            "<td>1\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Andhra_Pradesh\" title=\"Andhra Pradesh\">Andhra Pradesh</a>\n",
+            "</th>\n",
+            "<td>Visakhapatnam<sup class=\"reference\" id=\"cite_ref-capitals_3-0\"><a href=\"#cite_note-capitals-3\">[3]</a></sup>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Amaravati\" title=\"Amaravati\">Visakhapatnam</a><sup class=\"reference\" id=\"cite_ref-capitals_3-1\"><a href=\"#cite_note-capitals-3\">[3]</a></sup>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Amaravati\" title=\"Amaravati\">Kurnool</a><sup class=\"reference\" id=\"cite_ref-capitals_3-2\"><a href=\"#cite_note-capitals-3\">[3]</a></sup>\n",
+            "</td>\n",
+            "<td>1956\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Hyderabad\" title=\"Hyderabad\">Hyderabad</a><sup class=\"reference\" id=\"cite_ref-4\"><a href=\"#cite_note-4\">[a]</a></sup>(1956–2017)\n",
+            "<p><a href=\"/wiki/Amaravati\" title=\"Amaravati\">Amaravati</a> (2017-2020)\n",
+            "</p>\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>2\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Arunachal_Pradesh\" title=\"Arunachal Pradesh\">Arunachal Pradesh</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Itanagar\" title=\"Itanagar\">Itanagar</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Itanagar\" title=\"Itanagar\">Itanagar</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Guwahati\" title=\"Guwahati\">Guwahati</a>\n",
+            "</td>\n",
+            "<td>1987\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>3\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Assam\" title=\"Assam\">Assam</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Dispur\" title=\"Dispur\">Dispur</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Dispur\" title=\"Dispur\">Dispur</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Guwahati\" title=\"Guwahati\">Guwahati</a>\n",
+            "</td>\n",
+            "<td>1972\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Shillong\" title=\"Shillong\">Shillong</a><sup class=\"reference\" id=\"cite_ref-6\"><a href=\"#cite_note-6\">[b]</a></sup> (1950–1972)\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>4\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Bihar\" title=\"Bihar\">Bihar</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Patna\" title=\"Patna\">Patna</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Patna\" title=\"Patna\">Patna</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Patna\" title=\"Patna\">Patna</a>\n",
+            "</td>\n",
+            "<td>1950\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>5\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Chhattisgarh\" title=\"Chhattisgarh\">Chhattisgarh</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Naya_Raipur\" title=\"Naya Raipur\">Naya Raipur</a> <sup class=\"reference\" id=\"cite_ref-7\"><a href=\"#cite_note-7\">[c]</a></sup>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Raipur\" title=\"Raipur\">Raipur</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Bilaspur,_Chhattisgarh\" title=\"Bilaspur, Chhattisgarh\">Bilaspur</a>\n",
+            "</td>\n",
+            "<td>2000\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>6\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Goa\" title=\"Goa\">Goa</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Panaji\" title=\"Panaji\">Panaji</a> <sup class=\"reference\" id=\"cite_ref-9\"><a href=\"#cite_note-9\">[d]</a></sup>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Porvorim\" title=\"Porvorim\">Porvorim</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Mumbai\" title=\"Mumbai\">Mumbai</a>\n",
+            "</td>\n",
+            "<td>1987\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>7\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Gujarat\" title=\"Gujarat\">Gujarat</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Gandhinagar\" title=\"Gandhinagar\">Gandhinagar</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Gandhinagar\" title=\"Gandhinagar\">Gandhinagar</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Ahmedabad\" title=\"Ahmedabad\">Ahmedabad</a>\n",
+            "</td>\n",
+            "<td>1960\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Ahmedabad\" title=\"Ahmedabad\">Ahmedabad</a> (1960–1970)\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>8\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Haryana\" title=\"Haryana\">Haryana</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Chandigarh\" title=\"Chandigarh\">Chandigarh</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Chandigarh\" title=\"Chandigarh\">Chandigarh</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Chandigarh\" title=\"Chandigarh\">Chandigarh</a>\n",
+            "</td>\n",
+            "<td>1966\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>9\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Himachal_Pradesh\" title=\"Himachal Pradesh\">Himachal Pradesh</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Shimla\" title=\"Shimla\">Shimla</a>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Shimla\" title=\"Shimla\">Shimla</a>         (Summer)<br/><a class=\"mw-redirect\" href=\"/wiki/Dharamsala\" title=\"Dharamsala\">Dharamsala</a> (Winter)<sup class=\"reference\" id=\"cite_ref-10\"><a href=\"#cite_note-10\">[6]</a></sup>\n",
+            "</td>\n",
+            "<td>Shimla \n",
+            "</td>\n",
+            "<td>1971\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>10\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Jharkhand\" title=\"Jharkhand\">Jharkhand</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Ranchi\" title=\"Ranchi\">Ranchi</a>\n",
+            "</td>\n",
+            "<td>Ranchi\n",
+            "</td>\n",
+            "<td>Ranchi\n",
+            "</td>\n",
+            "<td>2000\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>11\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Karnataka\" title=\"Karnataka\">Karnataka</a>\n",
+            "</th>\n",
+            "<td><a class=\"mw-redirect\" href=\"/wiki/Bengaluru\" title=\"Bengaluru\">Bengaluru</a>\n",
+            "</td>\n",
+            "<td>Bengaluru\n",
+            "</td>\n",
+            "<td>Bengaluru\n",
+            "</td>\n",
+            "<td>1956\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>12\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Kerala\" title=\"Kerala\">Kerala</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Thiruvananthapuram\" title=\"Thiruvananthapuram\">Thiruvananthapuram</a>\n",
+            "</td>\n",
+            "<td>Thiruvananthapuram\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Kochi\" title=\"Kochi\">Kochi</a>\n",
+            "</td>\n",
+            "<td>1956\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>13\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Madhya_Pradesh\" title=\"Madhya Pradesh\">Madhya Pradesh</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Bhopal\" title=\"Bhopal\">Bhopal</a>\n",
+            "</td>\n",
+            "<td>Bhopal\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Jabalpur\" title=\"Jabalpur\">Jabalpur</a>\n",
+            "</td>\n",
+            "<td>1956\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>14\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Maharashtra\" title=\"Maharashtra\">Maharashtra</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Mumbai\" title=\"Mumbai\">Mumbai</a><sup class=\"reference\" id=\"cite_ref-11\"><a href=\"#cite_note-11\">[e]</a></sup>\n",
+            "</td>\n",
+            "<td>Mumbai (Summer)\n",
+            "<p><a href=\"/wiki/Nagpur\" title=\"Nagpur\">Nagpur</a>  (Winter)\n",
+            "</p>\n",
+            "</td>\n",
+            "<td>Mumbai\n",
+            "</td>\n",
+            "<td>1960\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>15\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Manipur\" title=\"Manipur\">Manipur</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Imphal\" title=\"Imphal\">Imphal</a>\n",
+            "</td>\n",
+            "<td>Imphal\n",
+            "</td>\n",
+            "<td>Imphal\n",
+            "</td>\n",
+            "<td>1972\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>16\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Meghalaya\" title=\"Meghalaya\">Meghalaya</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Shillong\" title=\"Shillong\">Shillong</a>\n",
+            "</td>\n",
+            "<td>Shillong\n",
+            "</td>\n",
+            "<td>Shillong\n",
+            "</td>\n",
+            "<td>1972\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>17\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Mizoram\" title=\"Mizoram\">Mizoram</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Aizawl\" title=\"Aizawl\">Aizawl</a>\n",
+            "</td>\n",
+            "<td>Aizawl\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Guwahati\" title=\"Guwahati\">Guwahati</a>\n",
+            "</td>\n",
+            "<td>1987\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>18\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Nagaland\" title=\"Nagaland\">Nagaland</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Kohima\" title=\"Kohima\">Kohima</a>\n",
+            "</td>\n",
+            "<td>Kohima\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Guwahati\" title=\"Guwahati\">Guwahati</a>\n",
+            "</td>\n",
+            "<td>1963\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>19\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Odisha\" title=\"Odisha\">Odisha</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Bhubaneswar\" title=\"Bhubaneswar\">Bhubaneswar</a>\n",
+            "</td>\n",
+            "<td>Bhubaneswar\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Cuttack\" title=\"Cuttack\">Cuttack</a>\n",
+            "</td>\n",
+            "<td>1950\n",
+            "</td>\n",
+            "<td>\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>20\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Punjab,_India\" title=\"Punjab, India\">Punjab</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Chandigarh\" title=\"Chandigarh\">Chandigarh</a>\n",
+            "</td>\n",
+            "<td>Chandigarh\n",
+            "</td>\n",
+            "<td>Chandigarh\n",
+            "</td>\n",
+            "<td>1966\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>21\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Rajasthan\" title=\"Rajasthan\">Rajasthan</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Jaipur\" title=\"Jaipur\">Jaipur</a>\n",
+            "</td>\n",
+            "<td>Jaipur\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Jodhpur\" title=\"Jodhpur\">Jodhpur</a>\n",
+            "</td>\n",
+            "<td>1950\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>22\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Sikkim\" title=\"Sikkim\">Sikkim</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Gangtok\" title=\"Gangtok\">Gangtok</a><sup class=\"reference\" id=\"cite_ref-13\"><a href=\"#cite_note-13\">[f]</a></sup>\n",
+            "</td>\n",
+            "<td>Gangtok\n",
+            "</td>\n",
+            "<td>Gangtok\n",
+            "</td>\n",
+            "<td>1975\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>23\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Tamil_Nadu\" title=\"Tamil Nadu\">Tamil Nadu</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Chennai\" title=\"Chennai\">Chennai</a><sup class=\"reference\" id=\"cite_ref-14\"><a href=\"#cite_note-14\">[g]</a></sup>\n",
+            "</td>\n",
+            "<td>Chennai\n",
+            "</td>\n",
+            "<td>Chennai\n",
+            "</td>\n",
+            "<td>1956\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>24\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Telangana\" title=\"Telangana\">Telangana</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Hyderabad\" title=\"Hyderabad\">Hyderabad</a>\n",
+            "</td>\n",
+            "<td>Hyderabad\n",
+            "</td>\n",
+            "<td>Hyderabad\n",
+            "</td>\n",
+            "<td>2014\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>25\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Tripura\" title=\"Tripura\">Tripura</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Agartala\" title=\"Agartala\">Agartala</a>\n",
+            "</td>\n",
+            "<td>Agartala\n",
+            "</td>\n",
+            "<td>Agartala\n",
+            "</td>\n",
+            "<td>1972\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>26\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Uttar_Pradesh\" title=\"Uttar Pradesh\">Uttar Pradesh</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Lucknow\" title=\"Lucknow\">Lucknow</a>\n",
+            "</td>\n",
+            "<td>Lucknow\n",
+            "</td>\n",
+            "<td><a class=\"mw-redirect\" href=\"/wiki/Prayagraj\" title=\"Prayagraj\">Prayagraj</a>\n",
+            "</td>\n",
+            "<td>1950\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>27\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/Uttarakhand\" title=\"Uttarakhand\">Uttarakhand</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Gairsain\" title=\"Gairsain\">Gairsain</a>   (Summer)\n",
+            "<p><a href=\"/wiki/Dehradun\" title=\"Dehradun\">Dehradun</a> (Winter)\n",
+            "</p>\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Gairsain\" title=\"Gairsain\">Gairsain</a>   (Summer)<sup class=\"reference\" id=\"cite_ref-15\"><a href=\"#cite_note-15\">[8]</a></sup><br/>Dehradun (Winter)\n",
+            "</td>\n",
+            "<td><a href=\"/wiki/Nainital\" title=\"Nainital\">Nainital</a>\n",
+            "</td>\n",
+            "<td>2000\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr>\n",
+            "<tr>\n",
+            "<td>28\n",
+            "</td>\n",
+            "<th scope=\"row\"><a href=\"/wiki/West_Bengal\" title=\"West Bengal\">West Bengal</a>\n",
+            "</th>\n",
+            "<td><a href=\"/wiki/Kolkata\" title=\"Kolkata\">Kolkata</a>\n",
+            "</td>\n",
+            "<td>Kolkata\n",
+            "</td>\n",
+            "<td>Kolkata\n",
+            "</td>\n",
+            "<td>1950\n",
+            "</td>\n",
+            "<td> —\n",
+            "</td></tr></tbody></table>\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CYOf6u7wrPpW"
+      },
+      "source": [
+        "N = [] \n",
+        "S = [] \n",
+        "A = [] \n",
+        "L = [] \n",
+        "J = [] \n",
+        "Y = [] \n",
+        "F = [] "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "wwJGmDrQ0EoB"
+      },
+      "source": [
+        "## Functions, Conditionals, and Iteration\n",
+        "Let's create a Python function, and call it from a loop."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ydtyjf0or22G",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "997a8e05-ca3a-4008-a3d8-e134a9f05f2f"
+      },
+      "source": [
+        "for row in table.findAll(\"tr\"):\n",
+        "    cells = row.findAll('td')\n",
+        "    states = row.findAll('th') #To store second column data\n",
+        "\n",
+        "    if 0 < len(cells):\n",
+        "        N.append(cells[0].find(text=True).rstrip())\n",
+        "    if 0 < len(states):\n",
+        "        S.append(states[0].find(text=True).rstrip())\n",
+        "    if 1 < len(cells):\n",
+        "        A.append(cells[1].find(text=True).rstrip())\n",
+        "    if 2 < len(cells):\n",
+        "        L.append(cells[2].find(text=True).rstrip())\n",
+        "    if 3 < len(cells):\n",
+        "        J.append(cells[3].find(text=True).rstrip())\n",
+        "    if 4 < len(cells):\n",
+        "        Y.append(cells[4].find(text=True).rstrip())\n",
+        "    if 5 < len(cells):\n",
+        "        F.append(cells[5].find(text=True).rstrip())\n",
+        "\n",
+        "print(N)\n",
+        "\n",
+        "print(S)\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28']\n",
+            "['No.', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal']\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "THTToYBguBto"
+      },
+      "source": [
+        "from lxml import html\n",
+        "import requests\n",
+        "import pandas as pd"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4GzkxalPuD30"
+      },
+      "source": [
+        "user='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "emiOafrhuat-"
+      },
+      "source": [
+        "am_url = 'https://www.amazon.in/Test-Exclusive-558/product-reviews/B077PWJRFH/?pageNumber=2'\n",
+        "\n",
+        "head = {'User-Agent': user}"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_sLSVvVIutD7"
+      },
+      "source": [
+        "page = requests.get(am_url, headers = head)\n",
+        "bre = html.fromstring(page.content)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "gMN3lny-vFm4",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ecacefbb-5117-4c91-ae82-26b9ad888ee4"
+      },
+      "source": [
+        "reviews_df = pd.DataFrame()\n",
+        "\n",
+        "path_reviews = '//div[@data-hook=\"review\"]'\n",
+        "reviews = bre.xpath(path_reviews)\n",
+        "\n",
+        "path_rating  = './/i[@data-hook=\"review-star-rating\"]//text()'\n",
+        "path_title   = './/a[@data-hook=\"review-title\"]//text()'\n",
+        "path_author  = './/span[@class=\"a-profile-name\"]//text()'\n",
+        "path_date    = './/span[@data-hook=\"review-date\"]//text()'\n",
+        "path_body    = './/span[@data-hook=\"review-body\"]//text()'\n",
+        "path_helpful = './/span[@data-hook=\"helpful-vote-statement\"]//text()'\n",
+        "\n",
+        "for review in reviews:\n",
+        "    rating  = review.xpath(path_rating)\n",
+        "    title   = review.xpath(path_title)\n",
+        "    author  = review.xpath(path_author)\n",
+        "    date    = review.xpath(path_date)\n",
+        "    body    = review.xpath(path_body)\n",
+        "    helpful = review.xpath(path_helpful)\n",
+        "\n",
+        "    review_dict = {'rating': rating,\n",
+        "                   'title': title,\n",
+        "                   'author': author,\n",
+        "                   'date': date,\n",
+        "                   'body': body,\n",
+        "                   'helpful': helpful}\n",
+        "    reviews_df = reviews_df.append(review_dict, ignore_index=True)\n",
+        "\n",
+        "reviews_df.to_csv(\"amazon_reviews.csv\", sep='\\t', encoding='utf-8')\n",
+        "print(reviews_df)\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "                    author  ...                                              title\n",
+            "0    [Suddhasattwa Mahato]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , Amazon is Best,...\n",
+            "1  [Mohammad Ali Ganiyani]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , Worst 👎phone 📞 ...\n",
+            "2            [Prashant s.]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , Best phone in t...\n",
+            "3      [Anandakrishnan Gs]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , Not Recommended...\n",
+            "4         [Sagar Narkhede]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , Overall good at...\n",
+            "5                [Sathish]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , Heating Issue/ ...\n",
+            "6         [Piyush Mohanta]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , DON'T BUY, \\n  \\n]\n",
+            "7            [Arun Pandey]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , Excellent phone...\n",
+            "8                  [Nidhy]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , PLEASE READ COM...\n",
+            "9                [Dheeraj]  ...  [\\n\\n\\n\\n\\n\\n\\n\\n  \\n  \\n    , WASTE OF MONEY,...\n",
+            "\n",
+            "[10 rows x 6 columns]\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pRllo2HLfXiu"
+      },
+      "source": [
+        "def HelloWorldXY(x, y):\n",
+        "  if (x < 10):\n",
+        "    print(\"Hello World, x was < 10\")\n",
+        "  elif (x < 20):\n",
+        "    print(\"Hello World, x was >= 10 but < 20\")\n",
+        "  else:\n",
+        "    print(\"Hello World, x was >= 20\")\n",
+        "  return x + y\n",
+        "\n",
+        "for i in range(8, 25, 5):  # i=8, 13, 18, 23 (start, stop, step)\n",
+        "  print(\"--- Now running with i: {}\".format(i))\n",
+        "  r = HelloWorldXY(i,i)\n",
+        "  print(\"Result from HelloWorld: {}\".format(r))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "TbrIXnoatW7v"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lHNmDCh0JpVP"
+      },
+      "source": [
+        "print(HelloWorldXY(1,2))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "kiZG7uhm8qCF"
+      },
+      "source": [
+        "Easy, right?\n",
+        "\n",
+        "If you want a loop starting at 0 to 2 (exclusive) you could do any of the following"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "m8YQN1H41L-Y"
+      },
+      "source": [
+        "print(\"Iterate over the items. `range(2)` is like a list [0,1].\")\n",
+        "for i in range(2):\n",
+        "  print(i)\n",
+        "\n",
+        "print(\"Iterate over an actual list.\")\n",
+        "for i in [0,1]:\n",
+        "  print(i)\n",
+        "\n",
+        "print(\"While works\")\n",
+        "i = 0\n",
+        "while i < 2:\n",
+        "  print(i)\n",
+        "  i += 1"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vIgmFZq4zszl"
+      },
+      "source": [
+        "print(\"Python supports standard key words like continue and break\")\n",
+        "while True:\n",
+        "  print(\"Entered while\")\n",
+        "  break"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "5QyOUhFw1OUX"
+      },
+      "source": [
+        "## Numpy and lists\n",
+        "Python has lists built into the language.\n",
+        "However, we will use a library called numpy for this.\n",
+        "Numpy gives you lots of support functions that are useful when doing Machine Learning.\n",
+        "\n",
+        "Here, you will also see an import statement. This statement makes the entire numpy package available and we can access those symbols using the abbreviated 'np' syntax."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4Dxk4q-jzEy4"
+      },
+      "source": [
+        "import numpy as np  # Make numpy available using np.\n",
+        "\n",
+        "# Create a numpy array, and append an element\n",
+        "a = np.array([\"Hello\", \"World\"])\n",
+        "a = np.append(a, \"!\")\n",
+        "print(\"Current array: {}\".format(a))\n",
+        "print(\"Printing each element\")\n",
+        "for i in a:\n",
+        "  print(i)\n",
+        "\n",
+        "print(\"\\nPrinting each element and their index\")\n",
+        "for i,e in enumerate(a):\n",
+        "  print(\"Index: {}, was: {}\".format(i, e))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RTa8_9G3LV03"
+      },
+      "source": [
+        "print(\"\\nShowing some basic math on arrays\")\n",
+        "b = np.array([0,1,4,3,2])\n",
+        "print(\"Max: {}\".format(np.max(b)))\n",
+        "print(\"Average: {}\".format(np.average(b)))\n",
+        "print(\"Max index: {}\".format(np.argmax(b)))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9YaGj5n4LW7P"
+      },
+      "source": [
+        "print(\"\\nYou can print the type of anything\")\n",
+        "print(\"Type of b: {}, type of b[0]: {}\".format(type(b), type(b[0])))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "V6ilVhi9LXn_"
+      },
+      "source": [
+        "print(\"\\nUse numpy to create a [3,3] dimension array with random number\")\n",
+        "c = np.random.rand(3, 3)\n",
+        "print(c)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "W_Q-DkFCLYGA"
+      },
+      "source": [
+        "print(\"\\nYou can print the dimensions of arrays\")\n",
+        "print(\"Shape of a: {}\".format(a.shape))\n",
+        "print(\"Shape of b: {}\".format(b.shape))\n",
+        "print(\"Shape of c: {}\".format(c.shape))\n",
+        "print(\"...Observe, Python uses both [0,1,2] and (0,1,2) to specify lists\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "c-Jk4dG91dvD"
+      },
+      "source": [
+        "## Colab Specifics"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "G0cGd8sHEmKi"
+      },
+      "source": [
+        "Colab is a virtual machine you can access directly. To run commands at the VM's terminal, prefix the line with an exclamation point (!).\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cLkfhyzq0W2y"
+      },
+      "source": [
+        "print(\"\\nDoing $ls on filesystem\")\n",
+        "!ls -l\n",
+        "!pwd"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "gR2WTN1cOZ1n"
+      },
+      "source": [
+        "print(\"Install numpy\")  # Just for test, numpy is actually preinstalled in all Colab instances\n",
+        "!pip install numpy"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "QuWRpQdatAIU"
+      },
+      "source": [
+        "**Exercise**\n",
+        "\n",
+        "Create a code cell underneath this text cell and add code to:\n",
+        "\n",
+        "\n",
+        "*   List the path of the current directory (pwd)\n",
+        "* Go to / (cd) and list the content (ls -l)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xU-cJbMCR61P"
+      },
+      "source": [
+        "!pwd\n",
+        "!cd /\n",
+        "!ls -l\n",
+        "print(\"Hello\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "7b5jv0ouFREV"
+      },
+      "source": [
+        "All usage of Colab in this course is completely free or charge. Even GPU usage is provided free of charge for some hours of usage every day.\n",
+        "\n",
+        "**Using GPUs**\n",
+        "* Many of the exercises in the course executes more quickly by using GPU runtime: Runtime | Change runtime type | Hardware accelerator | GPU\n",
+        "\n",
+        "**Some final words on Colab**\n",
+        "*   You execute each cell in order, you can edit & re-execute cells if you want\n",
+        "*   Sometimes, this could have unintended consequences. For example, if you add a dimension to an array and execute the cell multiple times, then the cells after may not work. If you encounter problem reset your environment:\n",
+        "  *   Runtime -> Restart runtime... Resets your Python shell\n",
+        "  *   Runtime -> Restart all runtimes... Will reset the Colab image, and get you back to a 100% clean environment\n",
+        "* You can also clear the output in the Colab by doing: Edit -> Clear all outputs\n",
+        "* Colabs in this course are loaded from GitHub. Save to your Google Drive if you want a copy with your code/output: File -> Save a copy in Drive...\n",
+        "\n",
+        "**Learn More**\n",
+        "*   Check out [this](https://www.youtube.com/watch?v=inN8seMm7UI&list=PLQY2H8rRoyvwLbzbnKJ59NkZvQAW9wLbx&index=3) episode of #CodingTensorFlow, and don't forget to subscribe to the YouTube channel ;)\n"
+      ]
+    }
+  ]
+}
